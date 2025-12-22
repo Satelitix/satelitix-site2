@@ -846,6 +846,17 @@ z"/>
   <footer class="footer">
     © 2025 Satelitix
   </footer>
+	
+  <!-- 👇 HIER -->
+  <script>
+    window.addEventListener("scroll", () => {
+      const y = window.scrollY * 0.02;
+      const satellite = document.querySelector(".satellite");
+      if (!satellite) return;
 
+      satellite.style.transform = `translateY(${-y}px)`;
+    });
+  </script>
+	
 </body>
 </html>
