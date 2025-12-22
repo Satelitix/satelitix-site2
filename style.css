@@ -195,5 +195,7 @@ nav a:hover {
   transition: transform 0.2s ease-out;
 }
 
+.satellite-scroll { outline: 2px solid cyan; }
+.satellite { outline: 2px solid magenta; }
 
 
