@@ -199,3 +199,12 @@ nav a:hover {
 .satellite { outline: 2px solid magenta; }
 
 
+path {
+  opacity: 0.05;
+}
+
+.satellite path {
+  opacity: 1;
+  fill: red;
+}
+
