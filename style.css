@@ -195,13 +195,5 @@ nav a:hover {
   transition: transform 0.2s ease-out;
 }
 
-<script>
-  window.addEventListener("scroll", () => {
-    const y = window.scrollY * 0.02;
-    document.querySelector(".satellite")
-      .style.transform = `translateY(${-y}px)`;
-  });
-</script>
-
 
 
