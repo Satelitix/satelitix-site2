@@ -197,14 +197,3 @@ nav a:hover {
 
 .satellite-scroll { outline: 2px solid cyan; }
 .satellite { outline: 2px solid magenta; }
-
-
-path {
-  opacity: 0.05;
-}
-
-.satellite path {
-  opacity: 1;
-  fill: red;
-}
-
