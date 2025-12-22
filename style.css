@@ -179,3 +179,29 @@ nav a:hover {
   }
 }
 
+.satellite {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: satelliteFloat 6s ease-in-out infinite;
+}
+
+@keyframes satelliteFloat {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+.satellite {
+  transition: transform 0.2s ease-out;
+}
+
+<script>
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY * 0.02;
+    document.querySelector(".satellite")
+      .style.transform = `translateY(${-y}px)`;
+  });
+</script>
+
+
+
