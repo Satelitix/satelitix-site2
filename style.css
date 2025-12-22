@@ -154,3 +154,42 @@ nav a:hover {
     display: none;
   }
 }
+
+/* === Satelitix SVG Animations === */
+
+.logo-svg {
+  opacity: 0;
+  transform: scale(0.96);
+  animation: logoFade 1.2s ease-out forwards;
+}
+
+@keyframes logoFade {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.orbit {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: orbitRotate 40s linear infinite;
+}
+
+@keyframes orbitRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .logo-svg,
+  .orbit {
+    animation: none;
+  }
+}
+
