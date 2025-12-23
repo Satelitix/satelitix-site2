@@ -182,20 +182,11 @@ nav a:hover {
   }
 }
 
-.satellite-scroll {
-  will-change: transform;
-}
 
 .satellite-float {
   animation: floatIdle 6s ease-in-out infinite;
   transform-origin: center;
 }
-
-#satellite-wrapper {
-  transform-origin: center;
-  will-change: transform;
-}
-
 
 @keyframes floatIdle {
   0%   { transform: translateY(0); }
@@ -203,3 +194,7 @@ nav a:hover {
   100% { transform: translateY(0); }
 }
 
+#satellite-wrapper {
+  transform-origin: center;
+  will-change: transform;
+}
