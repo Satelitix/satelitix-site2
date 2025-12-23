@@ -54,14 +54,11 @@ opacity: 1;
 .hero {
 padding: 5rem 0;
 }
-
 .hero-logo {
   position: relative;
-  width: 420px;
-  height: 420px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 460px;        /* ruimte voor boog */
+  height: 460px;
+  justify-self: end;   /* duwt logo naar rechts */
   overflow: visible;
 }
 
