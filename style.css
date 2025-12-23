@@ -193,8 +193,3 @@ nav a:hover {
   50%  { transform: translateY(-68px); }
   100% { transform: translateY(0); }
 }
-
-#satellite-wrapper {
-  transform-origin: center;
-  will-change: transform;
-}
