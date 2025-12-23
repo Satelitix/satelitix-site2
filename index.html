@@ -858,39 +858,38 @@ z"/>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  const wrapper = document.getElementById("satellite-wrapper");
+  const satellite = document.getElementById("satellite-path-follow");
   const path = document.getElementById("satellite-path");
 
-  if (!wrapper || !path) {
-    console.error("Satellite wrapper or path not found");
-    return;
-  }
+  if (!satellite || !path) return;
 
-  const length = path.getTotalLength();
+  const pathLength = path.getTotalLength();
 
-  function update() {
+  function updateSatellite() {
     const scrollY = window.scrollY;
-    const max = window.innerHeight * 1.4;
-    const t = Math.min(scrollY / max, 1);
+    const maxScroll = window.innerHeight * 2; // grotere boog
+    const t = Math.min(scrollY / maxScroll, 1);
 
-    const point = path.getPointAtLength(t * length);
+    const point = path.getPointAtLength(t * pathLength);
 
-    const scale = 1 + t * 0.25;
+    // ❗ exacte SVG-coördinaten
+    const x = point.x;
+    const y = point.y;
+    const scale = 0.9 + t * 0.25;
 
-    wrapper.setAttribute(
+    satellite.setAttribute(
       "transform",
-      `translate(${point.x} ${point.y}) scale(${scale})`
+      `translate(${x} ${y}) scale(${scale})`
     );
   }
 
   window.addEventListener("scroll", () => {
-    requestAnimationFrame(update);
+    requestAnimationFrame(updateSatellite);
   });
 
-  update();
+  updateSatellite();
 });
 </script>
-
 
 
 
