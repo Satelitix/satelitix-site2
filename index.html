@@ -856,38 +856,36 @@ z"/>
   const satellite = document.querySelector(".satellite-scroll");
   const path = document.getElementById("satellite-path");
 
-  const pathLength = path.getTotalLength();
+  if (!satellite || !path) {
+    console.warn("Satellite or path not found");
+  }
 
-  // 🔒 Startpositie opslaan
-  const startX = satellite.getBoundingClientRect().left;
-  const startY = satellite.getBoundingClientRect().top;
+  const pathLength = path.getTotalLength();
 
   function updateSatellite() {
     const scrollY = window.scrollY;
     const maxScroll = window.innerHeight * 1.6;
-
     const t = Math.min(scrollY / maxScroll, 1);
 
-    // 📍 SVG trajectory
+    // Exact punt op SVG pad
     const point = path.getPointAtLength(t * pathLength);
 
-    // 🔁 NORMALISEER (belangrijk!)
-    const x = point.x - 520; // startpunt van je path
+    // ⚠️ SVG units, GEEN px
+    const x = point.x - 520;
     const y = point.y - 300;
 
-    // 🔍 Scale tijdens scroll
     const scale = 1 + t * 0.18;
 
-    satellite.style.transform = `
-      translate(${x}px, ${y}px)
-      scale(${scale})
-    `;
+    satellite.setAttribute(
+      "transform",
+      `translate(${x} ${y}) scale(${scale})`
+    );
   }
 
   window.addEventListener("scroll", () => {
     requestAnimationFrame(updateSatellite);
   });
 </script>
-	
+
 </body>
 </html>
