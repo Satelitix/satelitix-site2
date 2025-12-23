@@ -850,21 +850,19 @@ z"/>
     if (!satelliteScroll) return;
 
     const scrollY = window.scrollY;
-    const maxScroll = window.innerHeight * 1.2;
+    const maxScroll = window.innerHeight * 1.5;
 
     const t = Math.min(scrollY / maxScroll, 1);
 
-    // trajectory (zoals je rode lijn)
+    // 🚀 trajectory (rode lijn)
     const x = -140 * t;
     const y = 160 * t;
     const curve = Math.sin(t * Math.PI) * 80;
 
-    satelliteScroll.style.transform = `
-      translate(${x}px, ${y + curve}px)
-    `;
+    satelliteScroll.style.transform =
+      `translate(${x}px, ${y + curve}px)`;
   });
 </script>
-
 	
 </body>
 </html>
