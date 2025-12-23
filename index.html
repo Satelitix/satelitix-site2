@@ -846,23 +846,40 @@ z"/>
 	
   <!-- 👇 HIER -->
 <script>
-  const satelliteScroll = document.querySelector(".satellite-scroll");
+  const satellite = document.querySelector(".satellite-scroll");
 
-  window.addEventListener("scroll", () => {
-    if (!satelliteScroll) return;
+  let lastScrollY = 0;
+  let ticking = false;
 
+  function updateSatellite() {
     const scrollY = window.scrollY;
-    const maxScroll = window.innerHeight * 1.5;
+    const maxScroll = window.innerHeight * 1.6;
 
     const t = Math.min(scrollY / maxScroll, 1);
 
-    // 🚀 trajectory (rode lijn)
+    // 🔴 Exact trajectory (rode lijn)
     const x = -140 * t;
     const y = 160 * t;
     const curve = Math.sin(t * Math.PI) * 80;
 
-    satelliteScroll.style.transform =
-      `translate(${x}px, ${y + curve}px)`;
+    // 🔍 Scale langzaam omhoog
+    const scale = 1 + t * 0.18;
+
+    satellite.style.transform = `
+      translate(${x}px, ${y + curve}px)
+      scale(${scale})
+    `;
+
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    lastScrollY = window.scrollY;
+
+    if (!ticking) {
+      window.requestAnimationFrame(updateSatellite);
+      ticking = true;
+    }
   });
 </script>
 	
