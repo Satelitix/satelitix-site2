@@ -853,8 +853,15 @@ z"/>
 	
   <!-- 👇 HIER -->
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+
   const satellite = document.querySelector(".satellite-scroll");
   const path = document.getElementById("satellite-path");
+
+  if (!satellite || !path) {
+    console.error("❌ Satellite or path not found", { satellite, path });
+    return;
+  }
 
   const pathLength = path.getTotalLength();
 
@@ -879,8 +886,10 @@ z"/>
     requestAnimationFrame(updateSatellite);
   });
 
-  // 🔥 STAP 3 — HIER
+  // init
   updateSatellite();
+
+});
 </script>
 
 
