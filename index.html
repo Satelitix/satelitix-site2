@@ -204,9 +204,9 @@ z"/>
   fill="none"
   stroke="red"
 />
-<g id="satellite-wrapper">
-  <g id="satellite-float">
-    <g class="satellite">
+<g id="satellite-wrapper">        <!-- scroll / path -->
+  <g id="satellite-float">        <!-- idle float -->
+    <g class="satellite">         <!-- shapes -->
 <path fill="#FFFFFF" opacity="1.000000" stroke="none" 
 	d="
 M381.017517,295.340546 
@@ -865,22 +865,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!wrapper || !path) return;
 
   const length = path.getTotalLength();
-
-  // startpositie onthouden
-  const startPoint = path.getPointAtLength(0);
+  const start = path.getPointAtLength(0);
 
   function update() {
     const scrollY = window.scrollY;
-    const maxScroll = window.innerHeight * 2.2; // GROTE BOOG
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
     const t = Math.min(scrollY / maxScroll, 1);
 
-    const point = path.getPointAtLength(t * length);
+    const p = path.getPointAtLength(t * length);
 
-    // RELATIEVE verplaatsing
-    const dx = point.x - startPoint.x;
-    const dy = point.y - startPoint.y;
-
-    const scale = 0.9 + t * 0.35;
+    const dx = p.x - start.x;
+    const dy = p.y - start.y;
+    const scale = 0.9 + t * 0.4;
 
     wrapper.setAttribute(
       "transform",
@@ -895,6 +891,7 @@ document.addEventListener("DOMContentLoaded", () => {
   update();
 });
 </script>
+
 
 
 
