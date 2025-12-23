@@ -864,42 +864,47 @@ info@satelitix.nl
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  const wrapper = document.getElementById("satellite-wrapper");
+  const path = document.getElementById("satellite-path");
 
-const wrapper = document.getElementById("satellite-wrapper");
-const path = document.getElementById("satellite-path");
+  if (!wrapper || !path) return;
 
-if (!wrapper || !path) return;
+  const length = path.getTotalLength();
 
-const length = path.getTotalLength();
-const start = path.getPointAtLength(0);
-
-function update() {
-  const scrollY = window.scrollY;
-  const maxScroll = document.body.scrollHeight - window.innerHeight;
-  const t = Math.min(scrollY / maxScroll, 1);
-
-  const p = path.getPointAtLength(t * length);
-
-  // 🎯 Logo centrum (blijft constant)
+  // 🎯 Vast referentiepunt bij logo
   const centerX = 900;
   const centerY = 420;
 
-  // 🔹 Extra naar binnen trekken bij start
-  const basePull = 0.35;           // start: dichter bij logo
-  const pull = basePull * (1 - t * 0.7); // afbouw tijdens scroll
+  function update() {
+    const scrollY = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const t = Math.min(scrollY / maxScroll, 1);
 
-  const offsetX = (centerX - p.x) * pull;
-  const offsetY = (centerY - p.y) * pull;
+    const p = path.getPointAtLength(t * length);
 
-  // 🔹 Groter worden tijdens scroll
-  const scale = 0.7 + t * 0.9;
+    // 🔹 Start dichter bij logo
+    const basePull = 0.35;
+    const pull = basePull * (1 - t * 0.7);
 
-  wrapper.setAttribute(
-    "transform",
-    `translate(${p.x + offsetX} ${p.y + offsetY}) scale(${scale})`
-  );
-}
+    const offsetX = (centerX - p.x) * pull;
+    const offsetY = (centerY - p.y) * pull;
 
+    // 🔹 Groter bij scroll
+    const scale = 0.7 + t * 0.9;
+
+    wrapper.setAttribute(
+      "transform",
+      `translate(${p.x + offsetX} ${p.y + offsetY}) scale(${scale})`
+    );
+  }
+
+  // ✅ SCROLL IS HIER
+  window.addEventListener("scroll", () => {
+    requestAnimationFrame(update);
+  });
+
+  // ✅ eerste render
+  update();
 });
 </script>
 
