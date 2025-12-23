@@ -186,16 +186,6 @@ nav a:hover {
   will-change: transform;
 }
 
-
-.satellite {
-  transition: transform 0.2s ease-out;
-}
-
-.satellite {
-  transition: transform 0.1s linear;
-  will-change: transform;
-}
-
 .satellite-float {
   transform-box: fill-box;
   transform-origin: center;
