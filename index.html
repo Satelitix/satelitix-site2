@@ -192,13 +192,14 @@ M554.960266,421.018005
 	C556.142334,418.895203 555.736084,419.622864 555.178162,420.683197 
 	C554.992859,421.001099 554.960266,421.018005 554.960266,421.018005 
 z"/>
+<!-- trajectory (mag hidden later) -->
 <path
   id="satellite-path"
   d="
-    M 620 260
-    C 820 180,
-      900 380,
-      780 620
+    M 760 180
+    C 1020 120,
+      1120 520,
+      820 820
   "
   fill="none"
   stroke="red"
@@ -858,38 +859,43 @@ z"/>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  const satellite = document.getElementById("satellite-path-follow");
+  const wrapper = document.getElementById("satellite-wrapper");
   const path = document.getElementById("satellite-path");
 
-  if (!satellite || !path) return;
+  if (!wrapper || !path) return;
 
-  const pathLength = path.getTotalLength();
+  const length = path.getTotalLength();
 
-  function updateSatellite() {
+  // startpositie onthouden
+  const startPoint = path.getPointAtLength(0);
+
+  function update() {
     const scrollY = window.scrollY;
-    const maxScroll = window.innerHeight * 2; // grotere boog
+    const maxScroll = window.innerHeight * 2.2; // GROTE BOOG
     const t = Math.min(scrollY / maxScroll, 1);
 
-    const point = path.getPointAtLength(t * pathLength);
+    const point = path.getPointAtLength(t * length);
 
-    // ❗ exacte SVG-coördinaten
-    const x = point.x;
-    const y = point.y;
-    const scale = 0.9 + t * 0.25;
+    // RELATIEVE verplaatsing
+    const dx = point.x - startPoint.x;
+    const dy = point.y - startPoint.y;
 
-    satellite.setAttribute(
+    const scale = 0.9 + t * 0.35;
+
+    wrapper.setAttribute(
       "transform",
-      `translate(${x} ${y}) scale(${scale})`
+      `translate(${dx} ${dy}) scale(${scale})`
     );
   }
 
   window.addEventListener("scroll", () => {
-    requestAnimationFrame(updateSatellite);
+    requestAnimationFrame(update);
   });
 
-  updateSatellite();
+  update();
 });
 </script>
+
 
 
 
