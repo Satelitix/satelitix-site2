@@ -866,31 +866,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!satellite || !path) return;
 
-  const length = path.getTotalLength();
+  const pathLength = path.getTotalLength();
 
-  function update() {
-    const scrollY = window.scrollY;
-    const maxScroll =
+  // 🔧 STARTPUNT: hoeveel van het pad we overslaan
+  // hiermee begint de satelliet netjes bij het logo
+  const startOffset = pathLength * 0.12; // ← pas aan indien nodig (0.08 – 0.2)
+
+  function updateSatellite() {
+    const scrollTop = window.scrollY;
+    const docHeight =
       document.documentElement.scrollHeight - window.innerHeight;
 
-    const t = Math.min(scrollY / maxScroll, 1);
-    const point = path.getPointAtLength(t * length);
+    // veilige progress (0 → 1)
+    const progress = Math.min(scrollTop / docHeight, 1);
 
-    const scale = 0.55 + t * 0.9;
-
-    satellite.setAttribute(
-      "transform",
-      `translate(${point.x} ${point.y}) scale(${scale})`
+    // positie op het pad
+    const point = path.getPointAtLength(
+      startOffset + progress * (pathLength - startOffset)
     );
+
+    // schaal groeit bij scroll
+    const scale = 0.8 + progress * 0.6;
+
+    satellite.style.transform = `
+      translate(${point.x}px, ${point.y}px)
+      scale(${scale})
+    `;
   }
 
-  window.addEventListener("scroll", () =>
-    requestAnimationFrame(update)
-  );
-
-  update();
+  // init + scroll
+  updateSatellite();
+  window.addEventListener("scroll", updateSatellite, { passive: true });
 });
 </script>
+
 
 
 
