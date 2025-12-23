@@ -874,27 +874,32 @@ const length = path.getTotalLength();
 const start = path.getPointAtLength(0);
 
 function update() {
-const scrollY = window.scrollY;
-const maxScroll = document.body.scrollHeight - window.innerHeight;
-const t = Math.min(scrollY / maxScroll, 1);
+  const scrollY = window.scrollY;
+  const maxScroll = document.body.scrollHeight - window.innerHeight;
+  const t = Math.min(scrollY / maxScroll, 1);
 
-const p = path.getPointAtLength(t * length);
+  const p = path.getPointAtLength(t * length);
 
-const dx = p.x - start.x;
-const dy = p.y - start.y;
-const scale = 0.9 + t * 1.1;
+  // 🎯 Logo centrum (blijft constant)
+  const centerX = 900;
+  const centerY = 420;
 
-wrapper.setAttribute(
-"transform",
-`translate(${dx} ${dy}) scale(${scale})`
-);
+  // 🔹 Extra naar binnen trekken bij start
+  const basePull = 0.35;           // start: dichter bij logo
+  const pull = basePull * (1 - t * 0.7); // afbouw tijdens scroll
+
+  const offsetX = (centerX - p.x) * pull;
+  const offsetY = (centerY - p.y) * pull;
+
+  // 🔹 Groter worden tijdens scroll
+  const scale = 0.7 + t * 0.9;
+
+  wrapper.setAttribute(
+    "transform",
+    `translate(${p.x + offsetX} ${p.y + offsetY}) scale(${scale})`
+  );
 }
 
-window.addEventListener("scroll", () => {
-requestAnimationFrame(update);
-});
-
-update();
 });
 </script>
 
