@@ -856,11 +856,11 @@ z"/>
   const satellite = document.querySelector(".satellite-scroll");
   const path = document.getElementById("satellite-path");
 
-  if (!satellite || !path) {
-    console.warn("Satellite or path not found");
-  }
-
   const pathLength = path.getTotalLength();
+
+  // 🔒 Startpositie opslaan
+  const startX = satellite.getBoundingClientRect().left;
+  const startY = satellite.getBoundingClientRect().top;
 
   function updateSatellite() {
     const scrollY = window.scrollY;
@@ -868,23 +868,26 @@ z"/>
 
     const t = Math.min(scrollY / maxScroll, 1);
 
-    // 📍 Exact point on SVG path
+    // 📍 SVG trajectory
     const point = path.getPointAtLength(t * pathLength);
 
-    // 🔍 Scale on scroll
+    // 🔁 NORMALISEER (belangrijk!)
+    const x = point.x - 520; // startpunt van je path
+    const y = point.y - 300;
+
+    // 🔍 Scale tijdens scroll
     const scale = 1 + t * 0.18;
 
     satellite.style.transform = `
-      translate(${point.x}px, ${point.y}px)
+      translate(${x}px, ${y}px)
       scale(${scale})
     `;
   }
 
   window.addEventListener("scroll", () => {
-    window.requestAnimationFrame(updateSatellite);
+    requestAnimationFrame(updateSatellite);
   });
 </script>
-
 	
 </body>
 </html>
