@@ -196,15 +196,15 @@ z"/>
 <path
 id="satellite-path"
 d="
-    M 860 160
-    M 860 100
-   C 1100 40,
-     1500 180,
-     1460 420
-   C 1420 760,
-     1240 980,
-     1120 1040
- "
+   M 860 160
+   M 860 100
+  C 1100 40,
+    1500 180,
+    1460 420
+  C 1420 760,
+    1240 980,
+    1120 1040
+"
 fill="none"
 stroke="green"
 stroke-width="4"
@@ -864,46 +864,60 @@ info@satelitix.nl
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const wrapper = document.getElementById("satellite-wrapper");
-  const path = document.getElementById("satellite-path");
 
-  if (!wrapper || !path) return;
+const wrapper = document.getElementById("satellite-wrapper");
+const path = document.getElementById("satellite-path");
 
-  const length = path.getTotalLength();
-  const pathStart = path.getPointAtLength(0);
+if (!wrapper || !path) return;
 
-  // 🎯 STARTPOSITIE DICHT BIJ LOGO (AFSTEMMEN)
-  const startX = 980;   // iets rechts van logo
-  const startY = 360;   // iets boven logo
+const length = path.getTotalLength();
+const start = path.getPointAtLength(0);
 
-  function update() {
-    const scrollY = window.scrollY;
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-    const t = Math.min(scrollY / maxScroll, 1);
+function update() {
+const scrollY = window.scrollY;
+const maxScroll = document.body.scrollHeight - window.innerHeight;
+const t = Math.min(scrollY / maxScroll, 1);
+  const scrollY = window.scrollY;
+  const maxScroll = document.body.scrollHeight - window.innerHeight;
+  const t = Math.min(scrollY / maxScroll, 1);
 
-    const p = path.getPointAtLength(t * length);
+const p = path.getPointAtLength(t * length);
+  const p = path.getPointAtLength(t * length);
 
-    // 🔹 Relatieve beweging vanaf startpunt
-    const dx = p.x - pathStart.x;
-    const dy = p.y - pathStart.y;
+const dx = p.x - start.x;
+const dy = p.y - start.y;
+const scale = 0.9 + t * 1.1;
+  // 🎯 Logo centrum (blijft constant)
+  const centerX = 900;
+  const centerY = 420;
 
-    // 🔹 Groeit bij scroll
-    const scale = 0.6 + t * 1.0;
+wrapper.setAttribute(
+"transform",
+`translate(${dx} ${dy}) scale(${scale})`
+);
+}
+  // 🔹 Extra naar binnen trekken bij start
+  const basePull = 0.35;           // start: dichter bij logo
+  const pull = basePull * (1 - t * 0.7); // afbouw tijdens scroll
 
-    wrapper.setAttribute(
-      "transform",
-      `translate(${startX + dx} ${startY + dy}) scale(${scale})`
-    );
-  }
+window.addEventListener("scroll", () => {
+requestAnimationFrame(update);
+});
+  const offsetX = (centerX - p.x) * pull;
+  const offsetY = (centerY - p.y) * pull;
 
-  window.addEventListener("scroll", () => {
-    requestAnimationFrame(update);
-  });
+  // 🔹 Groter worden tijdens scroll
+  const scale = 0.7 + t * 0.9;
 
-  update();
+  wrapper.setAttribute(
+    "transform",
+    `translate(${p.x + offsetX} ${p.y + offsetY}) scale(${scale})`
+  );
+}
+
+update();
 });
 </script>
-
 
 
 
