@@ -855,11 +855,11 @@ z"/>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  const satellite = document.querySelector(".satellite-scroll");
+  const satellite = document.getElementById("satellite-wrapper");
   const path = document.getElementById("satellite-path");
 
   if (!satellite || !path) {
-    console.error("❌ Satellite or path not found", { satellite, path });
+    console.error("❌ Satellite or path not found");
     return;
   }
 
@@ -872,25 +872,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const point = path.getPointAtLength(t * pathLength);
 
-    const x = point.x - 520;
-    const y = point.y - 300;
-    const scale = 1 + t * 0.18;
+    const startX = 520;
+    const startY = 300;
 
-    satellite.setAttribute(
-      "transform",
-      `translate(${x} ${y}) scale(${scale})`
-    );
+    const x = point.x - startX;
+    const y = point.y - startY;
+    const scale = 1 + t * 0.25;
+
+    satellite.style.transform = `
+      translate(${x}px, ${y}px)
+      scale(${scale})
+    `;
   }
 
   window.addEventListener("scroll", () => {
     requestAnimationFrame(updateSatellite);
   });
 
-  // init
   updateSatellite();
-
 });
 </script>
+
 
 
 </body>
