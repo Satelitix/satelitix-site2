@@ -182,17 +182,10 @@ nav a:hover {
   }
 }
 
-.satellite {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: satelliteFloat 6s ease-in-out infinite;
+.satellite-scroll {
+  will-change: transform;
 }
 
-@keyframes satelliteFloat {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-70px); }
-  100% { transform: translateY(0); }
-}
 
 .satellite {
   transition: transform 0.2s ease-out;
