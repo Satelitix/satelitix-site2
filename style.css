@@ -57,9 +57,12 @@ padding: 5rem 0;
 
 .hero-logo {
   position: relative;
-  width: 420px;      /* ← DIT is je oude layout-breedte */
+  width: 420px;
   height: 420px;
-  overflow: visible; /* ← MAG buiten de box tekenen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
 }
 
 .hero h2 {
@@ -195,9 +198,11 @@ will-change: transform;
 }
 .logo-svg {
   position: absolute;
-  inset: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%) scale(1.6);
   width: 1324px;
   height: 1024px;
   pointer-events: none;
 }
+
