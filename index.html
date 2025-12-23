@@ -844,14 +844,20 @@ z"/>
 	
   <!-- 👇 HIER -->
 <script>
-  const sat = document.querySelector(".satellite-scroll");
+  document.addEventListener("DOMContentLoaded", () => {
+    const sat = document.querySelector(".satellite-scroll");
+    if (!sat) {
+      console.warn("satellite-scroll not found");
+      return;
+    }
 
-  window.addEventListener("scroll", () => {
-    if (!sat) return;
-    const y = window.scrollY * 0.02;
-    sat.style.transform = `translate3d(0, ${-y}px, 0)`;
+    window.addEventListener("scroll", () => {
+      const y = window.scrollY * 0.03;
+      sat.style.transform = `translate3d(0, ${-y}px, 0)`;
+    });
   });
 </script>
+
 
 	
 </body>
