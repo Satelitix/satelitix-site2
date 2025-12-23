@@ -207,6 +207,6 @@ nav a:hover {
 .hero-logo svg {
   height: 320px;
 }
-const y = window.scrollY * 0.08;
+const y = window.scrollY * 0.8;
 
 
