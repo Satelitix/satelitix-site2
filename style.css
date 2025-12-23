@@ -187,10 +187,15 @@ nav a:hover {
 }
 
 .satellite-float {
-  transform-box: fill-box;
-  transform-origin: center;
   animation: floatIdle 6s ease-in-out infinite;
+  transform-origin: center;
 }
+
+#satellite-wrapper {
+  transform-origin: center;
+  will-change: transform;
+}
+
 
 @keyframes floatIdle {
   0%   { transform: translateY(0); }
