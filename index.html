@@ -843,15 +843,16 @@ z"/>
   </footer>
 	
   <!-- 👇 HIER -->
-  <script>
-    window.addEventListener("scroll", () => {
-      const y = window.scrollY * 0.02;
-      const satellite = document.querySelector(".satellite");
-      if (!satellite) return;
+<script>
+  const sat = document.querySelector(".satellite-scroll");
 
-      satellite.style.transform = `translateY(${-y}px)`;
-    });
-  </script>
+  window.addEventListener("scroll", () => {
+    if (!sat) return;
+    const y = window.scrollY * 0.02;
+    sat.style.transform = `translate3d(0, ${-y}px, 0)`;
+  });
+</script>
+
 	
 </body>
 </html>
