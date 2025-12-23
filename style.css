@@ -202,3 +202,11 @@ nav a:hover {
 .logo-wrapper { outline: 2px solid red; }
 .satellite-scroll { outline: 2px solid cyan; }
 .satellite { outline: 2px solid lime; }
+
+
+.hero-logo svg {
+  height: 320px;
+}
+const y = window.scrollY * 0.08;
+
+
