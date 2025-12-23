@@ -193,23 +193,18 @@ M554.960266,421.018005
 	C554.992859,421.001099 554.960266,421.018005 554.960266,421.018005 
 z"/>
 <!-- trajectory (mag hidden later) -->
-<path
-id="satellite-path"
-d="
-   M 860 160
-   M 860 100
-  C 1100 40,
-    1500 180,
-    1460 420
-  C 1420 760,
-    1240 980,
-    1120 1040
-"
-fill="none"
-stroke="green"
-stroke-width="4"
-stroke-dasharray="10 6"
-/>
+<g id="orbit-root">
+  <path
+    id="satellite-path"
+    d="M 1120 180
+       C 1650 -180,
+         2000 620,
+         1180 1040"
+    fill="none"
+    stroke="green"
+    stroke-width="4"
+    stroke-dasharray="10 6"
+  />
 <g id="satellite-wrapper">        <!-- scroll / path -->
 <g id="satellite-float">        <!-- idle float -->
 <g class="satellite">         <!-- shapes -->
@@ -431,6 +426,7 @@ M354.523132,401.370605
 	C366.656433,388.325867 366.440338,390.302032 364.628479,392.044952 
 	C361.406921,395.143951 358.067688,398.120697 354.523132,401.370605 
 z"/>
+</g>
 </g>
 </g>
 </g>
@@ -864,58 +860,34 @@ info@satelitix.nl
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  const satellite = document.getElementById("satellite-wrapper");
+  const path = document.getElementById("satellite-path");
 
-const wrapper = document.getElementById("satellite-wrapper");
-const path = document.getElementById("satellite-path");
+  if (!satellite || !path) return;
 
-if (!wrapper || !path) return;
+  const length = path.getTotalLength();
 
-const length = path.getTotalLength();
-const start = path.getPointAtLength(0);
+  function update() {
+    const scrollY = window.scrollY;
+    const maxScroll =
+      document.documentElement.scrollHeight - window.innerHeight;
 
-function update() {
-const scrollY = window.scrollY;
-const maxScroll = document.body.scrollHeight - window.innerHeight;
-const t = Math.min(scrollY / maxScroll, 1);
-  const scrollY = window.scrollY;
-  const maxScroll = document.body.scrollHeight - window.innerHeight;
-  const t = Math.min(scrollY / maxScroll, 1);
+    const t = Math.min(scrollY / maxScroll, 1);
+    const point = path.getPointAtLength(t * length);
 
-const p = path.getPointAtLength(t * length);
-  const p = path.getPointAtLength(t * length);
+    const scale = 0.55 + t * 0.9;
 
-const dx = p.x - start.x;
-const dy = p.y - start.y;
-const scale = 0.9 + t * 1.1;
-  // 🎯 Logo centrum (blijft constant)
-  const centerX = 900;
-  const centerY = 420;
+    satellite.setAttribute(
+      "transform",
+      `translate(${point.x} ${point.y}) scale(${scale})`
+    );
+  }
 
-wrapper.setAttribute(
-"transform",
-`translate(${dx} ${dy}) scale(${scale})`
-);
-}
-  // 🔹 Extra naar binnen trekken bij start
-  const basePull = 0.35;           // start: dichter bij logo
-  const pull = basePull * (1 - t * 0.7); // afbouw tijdens scroll
-
-window.addEventListener("scroll", () => {
-requestAnimationFrame(update);
-});
-  const offsetX = (centerX - p.x) * pull;
-  const offsetY = (centerY - p.y) * pull;
-
-  // 🔹 Groter worden tijdens scroll
-  const scale = 0.7 + t * 0.9;
-
-  wrapper.setAttribute(
-    "transform",
-    `translate(${p.x + offsetX} ${p.y + offsetY}) scale(${scale})`
+  window.addEventListener("scroll", () =>
+    requestAnimationFrame(update)
   );
-}
 
-update();
+  update();
 });
 </script>
 
