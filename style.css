@@ -57,11 +57,8 @@ padding: 5rem 0;
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1.4fr; /* meer ruimte voor logo */
-  gap: 3rem;
-  align-items: center;
+  grid-template-columns: 1.2fr 1fr;
 }
-
 
 .hero h2 {
 font-size: 3rem;
