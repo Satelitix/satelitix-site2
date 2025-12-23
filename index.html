@@ -844,17 +844,25 @@ z"/>
 	
   <!-- 👇 HIER -->
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const sat = document.querySelector(".satellite-scroll");
-    if (!sat) {
-      console.warn("satellite-scroll not found");
-      return;
-    }
+  const satellite = document.querySelector(".satellite");
 
-    window.addEventListener("scroll", () => {
-      const y = window.scrollY * 0.03;
-      sat.style.transform = `translate3d(0, ${-y}px, 0)`;
-    });
+  window.addEventListener("scroll", () => {
+    if (!satellite) return;
+
+    const scrollY = window.scrollY;
+    const maxScroll = window.innerHeight * 1.2;
+
+    // Normalize scroll (0 → 1)
+    const t = Math.min(scrollY / maxScroll, 1);
+
+    // ✨ Trajectory math (curve)
+    const x = -120 * t;              // move left
+    const y = 140 * t;               // move down
+    const curve = Math.sin(t * Math.PI) * 60; // bend
+
+    satellite.style.transform = `
+      translate(${x}px, ${y + curve}px)
+    `;
   });
 </script>
 
