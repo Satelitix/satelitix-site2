@@ -157,10 +157,14 @@ nav a:hover {
 
 /* === Satelitix SVG Animations === */
 
-.logo-svg {
+.logo-wrapper {
   opacity: 0;
   transform: scale(0.96);
   animation: logoFade 1.2s ease-out forwards;
+}
+
+.logo-svg {
+  display: block;
 }
 
 @keyframes logoFade {
@@ -169,7 +173,6 @@ nav a:hover {
     transform: scale(1);
   }
 }
-
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
