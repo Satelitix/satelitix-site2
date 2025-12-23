@@ -870,10 +870,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!wrapper || !path) return;
 
   const length = path.getTotalLength();
+  const pathStart = path.getPointAtLength(0);
 
-  // 🎯 Vast referentiepunt bij logo
-  const centerX = 900;
-  const centerY = 420;
+  // 🎯 STARTPOSITIE DICHT BIJ LOGO (AFSTEMMEN)
+  const startX = 980;   // iets rechts van logo
+  const startY = 360;   // iets boven logo
 
   function update() {
     const scrollY = window.scrollY;
@@ -882,31 +883,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const p = path.getPointAtLength(t * length);
 
-    // 🔹 Start dichter bij logo
-    const basePull = 0.35;
-    const pull = basePull * (1 - t * 0.7);
+    // 🔹 Relatieve beweging vanaf startpunt
+    const dx = p.x - pathStart.x;
+    const dy = p.y - pathStart.y;
 
-    const offsetX = (centerX - p.x) * pull;
-    const offsetY = (centerY - p.y) * pull;
-
-    // 🔹 Groter bij scroll
-    const scale = 0.7 + t * 0.9;
+    // 🔹 Groeit bij scroll
+    const scale = 0.6 + t * 1.0;
 
     wrapper.setAttribute(
       "transform",
-      `translate(${p.x + offsetX} ${p.y + offsetY}) scale(${scale})`
+      `translate(${startX + dx} ${startY + dy}) scale(${scale})`
     );
   }
 
-  // ✅ SCROLL IS HIER
   window.addEventListener("scroll", () => {
     requestAnimationFrame(update);
   });
 
-  // ✅ eerste render
   update();
 });
 </script>
+
 
 
 
