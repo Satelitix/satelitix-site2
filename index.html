@@ -194,13 +194,15 @@ M554.960266,421.018005
 z"/>
 <path
   id="satellite-path"
-  d="M520 300 C 470 360, 420 420, 380 520"
+  d="
+    M 620 260
+    C 820 180,
+      900 380,
+      780 620
+  "
   fill="none"
-  stroke="red"
-  stroke-width="2"
-	
+  stroke="transparent"
 />
-
 <g id="satellite-wrapper">
   <g id="satellite-float">
     <g id="satellite">
@@ -860,30 +862,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const path = document.getElementById("satellite-path");
 
   if (!wrapper || !path) {
-    console.error("Satellite or path not found");
+    console.error("Satellite wrapper or path not found");
     return;
   }
 
-  const pathLength = path.getTotalLength();
-
-  // 🔹 startpositie van satelliet in SVG
-  const startPoint = path.getPointAtLength(0);
+  const length = path.getTotalLength();
 
   function update() {
     const scrollY = window.scrollY;
-    const maxScroll = window.innerHeight * 1.5;
-    const t = Math.min(scrollY / maxScroll, 1);
+    const max = window.innerHeight * 1.4;
+    const t = Math.min(scrollY / max, 1);
 
-    const point = path.getPointAtLength(t * pathLength);
-
-    const dx = point.x - startPoint.x;
-    const dy = point.y - startPoint.y;
+    const point = path.getPointAtLength(t * length);
 
     const scale = 1 + t * 0.25;
 
     wrapper.setAttribute(
       "transform",
-      `translate(${dx} ${dy}) scale(${scale})`
+      `translate(${point.x} ${point.y}) scale(${scale})`
     );
   }
 
@@ -894,6 +890,7 @@ document.addEventListener("DOMContentLoaded", () => {
   update();
 });
 </script>
+
 
 
 
