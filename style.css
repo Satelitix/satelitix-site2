@@ -201,3 +201,6 @@ nav a:hover {
   will-change: transform;
 }
 
+svg {
+  overflow: visible;
+}
