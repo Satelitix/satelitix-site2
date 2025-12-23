@@ -851,7 +851,6 @@ z"/>
     © 2025 Satelitix
   </footer>
 	
-  <!-- 👇 HIER -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -879,10 +878,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const y = point.y - startY;
     const scale = 1 + t * 0.25;
 
-    satellite.style.transform = `
-      translate(${x}px, ${y}px)
-      scale(${scale})
-    `;
+    satellite.setAttribute(
+      "transform",
+      `translate(${x} ${y}) scale(${scale})`
+    );
   }
 
   window.addEventListener("scroll", () => {
@@ -892,6 +891,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateSatellite();
 });
 </script>
+
 
 
 
