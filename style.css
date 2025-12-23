@@ -190,23 +190,12 @@ nav a:hover {
 
 @keyframes satelliteFloat {
   0%   { transform: translateY(0); }
-  50%  { transform: translateY(-50px); }
+  50%  { transform: translateY(-70px); }
   100% { transform: translateY(0); }
 }
 
 .satellite {
   transition: transform 0.2s ease-out;
 }
-
-
-.logo-wrapper { outline: 2px solid red; }
-.satellite-scroll { outline: 2px solid cyan; }
-.satellite { outline: 2px solid lime; }
-
-
-.hero-logo svg {
-  height: 320px;
-}
-const y = window.scrollY * 0.8;
 
 
