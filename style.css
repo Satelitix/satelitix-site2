@@ -189,7 +189,7 @@ nav a:hover {
 
 @keyframes floatIdle {
   0%   { transform: translateY(0); }
-  50%  { transform: translateY(-24px); }
+  50%  { transform: translateY(-54px); }
   100% { transform: translateY(0); }
 }
 
