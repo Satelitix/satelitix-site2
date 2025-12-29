@@ -78,7 +78,9 @@ opacity: 0.9;
   gap: 3rem;
   align-items: center;
 }
-
+.hero-grid {
+  transform: translateY(10vh); /* 👈 move everything down together */
+}
 
 /* BUTTONS */
 .btn {
