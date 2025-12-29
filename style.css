@@ -189,8 +189,8 @@ transform-origin: center;
 
 @keyframes floatIdle {
 0%   { transform: translateY(0); }
-  50%  { transform: translateY(-34px); }
-  50%  { transform: translateY(-64px); }
+  50%  { transform: translateY(-24px); }
+  50%  { transform: translateY(-54px); }
 100% { transform: translateY(0); }
 }
 
