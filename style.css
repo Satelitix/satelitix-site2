@@ -205,34 +205,89 @@ will-change: transform;
   transform-origin: center;
 }
 
-@media (max-width: 800px) {
+/* ===============================
+   MOBILE OPTIMIZATIONS (SAFE)
+   =============================== */
+@media (max-width: 768px) {
 
-  /* Stack hero nicely */
+  /* HERO LAYOUT */
+  .hero {
+    padding: 4rem 0 3rem;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-    text-align: center;
-    transform: translateY(0); /* undo desktop offset */
+    transform: none; /* remove desktop vertical shift */
   }
 
-  .hero {
-    padding: 3.5rem 0 4.5rem;
+  .hero-text {
+    text-align: center;
   }
 
   .hero h2 {
     font-size: 2.1rem;
-    line-height: 1.2;
+    line-height: 1.25;
   }
 
   .hero p {
-    font-size: 1rem;
-    margin: 0 auto 1.8rem;
+    font-size: 1.05rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  nav {
-    display: none;
+  /* LOGO / ANIMATION AREA */
+  .hero-logo {
+    width: 320px;
+    height: 320px;
+    margin: 0 auto;
+  }
+
+  .logo-svg {
+    transform: scale(1.9); /* mobile logo slightly bigger */
+  }
+
+  /* BUTTONS — BIG THUMBS */
+  .btn {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 0.75rem auto 0;
+    padding: 1rem 1.6rem;
+    font-size: 1.05rem;
+  }
+
+  .btn.secondary {
+    margin-top: 0.6rem;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 3rem 0;
+  }
+
+  .section h3 {
+    text-align: center;
+    font-size: 1.6rem;
+  }
+
+  /* SERVICES */
+  .services {
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* FOOTER */
+  .footer {
+    font-size: 0.8rem;
+    padding: 1.5rem;
   }
 }
+
 
 @media (max-width: 800px) {
   .btn {
@@ -258,7 +313,7 @@ will-change: transform;
   }
 
   .logo-svg {
-    transform: scale(1.65);
+    transform: scale(1.45);
   }
 }
 
