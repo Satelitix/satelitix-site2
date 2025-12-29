@@ -317,3 +317,29 @@ will-change: transform;
   }
 }
 
+@media (max-width: 768px) {
+
+  /* FORCE CENTERING AFTER HERO */
+  .section .container,
+  .footer,
+  .services {
+    text-align: center;
+  }
+
+  /* SERVICES GRID FIX */
+  .services {
+    justify-items: center;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  /* CONTACT BUTTON CENTER */
+  #contact .btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
