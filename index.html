@@ -869,14 +869,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const pathLength = path.getTotalLength();
   const pathStart = path.getPointAtLength(0);
-
+  
+  const scrollFactor = 1.8;
   function updateSatellite() {
     const scrollTop = window.scrollY;
     const docHeight =
       document.documentElement.scrollHeight - window.innerHeight;
 
-    const progress = Math.min(scrollTop / docHeight, 1);
-
+    const progress = Math.min(scrollTop / (docHeight * scrollFactor), 1);   
     const point = path.getPointAtLength(progress * pathLength);
 
     // ✅ RELATIVE movement (original SVG position preserved)
