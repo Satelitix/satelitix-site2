@@ -194,18 +194,19 @@ M554.960266,421.018005
 z"/>
 <!-- trajectory (mag hidden later) -->
 <g id="orbit-root">
-  <path
-  id="satellite-path"
-  d="M 900 420
-     C 1800 -120,
-  1800 820,
+<path
+id="satellite-path"
+d="M 900 420
+    C 1800 -120,
+ 1800 820,
+  1200 1280
   1200 1280"
-  fill="none"
-  stroke="none"
-  stroke-width="4"
-  stroke-dasharray="10 6"
+fill="none"
+stroke="none"
+stroke-width="4"
+stroke-dasharray="10 6"
 />
-  />
+/>
 <g id="satellite-wrapper">        <!-- scroll / path -->
 <g id="satellite-float">        <!-- idle float -->
 <g class="satellite">         <!-- shapes -->
@@ -859,40 +860,40 @@ info@satelitix.nl
 © 2025 Satelitix
 </footer>
 
-	
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const satellite = document.getElementById("satellite-wrapper");
-  const path = document.getElementById("satellite-path");
+const satellite = document.getElementById("satellite-wrapper");
+const path = document.getElementById("satellite-path");
 
-  if (!satellite || !path) return;
+if (!satellite || !path) return;
 
-  const pathLength = path.getTotalLength();
-  const pathStart = path.getPointAtLength(0);
-  
-	const scrollFactor = 1.8;
-	function updateSatellite() {
-    const scrollTop = window.scrollY;
-    const docHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
+const pathLength = path.getTotalLength();
+const pathStart = path.getPointAtLength(0);
 
-    const progress = Math.min(scrollTop / (docHeight * scrollFactor), 1);   
-    const point = path.getPointAtLength(progress * pathLength);
+const scrollFactor = 0.8;
+function updateSatellite() {
+const scrollTop = window.scrollY;
+const docHeight =
+document.documentElement.scrollHeight - window.innerHeight;
 
-    // ✅ RELATIVE movement (original SVG position preserved)
-    const dx = point.x - pathStart.x;
-    const dy = point.y - pathStart.y;
+const progress = Math.min(scrollTop / (docHeight * scrollFactor), 1);   
+const point = path.getPointAtLength(progress * pathLength);
 
-    const scale = 0.8 + progress * 0.8;
+// ✅ RELATIVE movement (original SVG position preserved)
+const dx = point.x - pathStart.x;
+const dy = point.y - pathStart.y;
 
-    satellite.style.transform = `
-      translate(${dx}px, ${dy}px)
-      scale(${scale})
-    `;
-  }
+const scale = 0.8 + progress * 0.8;
 
-  updateSatellite();
-  window.addEventListener("scroll", updateSatellite, { passive: true });
+satellite.style.transform = `
+     translate(${dx}px, ${dy}px)
+     scale(${scale})
+   `;
+}
+
+updateSatellite();
+window.addEventListener("scroll", updateSatellite, { passive: true });
 });
 </script>
 
