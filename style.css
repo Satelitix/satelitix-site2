@@ -229,20 +229,36 @@ will-change: transform;
     margin: 0 auto 1.8rem;
   }
 
-  /* Logo block */
+  nav {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .btn {
+    padding: 0.9rem 1.8rem;
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .services {
+    gap: 1.2rem;
+  }
+}
+
+
+@media (max-width: 800px) {
   .hero-logo {
-    width: 300px;
-    height: 300px;
+    width: 360px;
+    height: 360px;
     margin: 0 auto;
   }
 
-  /* Scale SVG safely */
   .logo-svg {
-    transform: scale(1.15);
-  }
-
-  nav {
-    display: none;
+    transform: scale(1.35);
   }
 }
 
