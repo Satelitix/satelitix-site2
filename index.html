@@ -860,42 +860,53 @@ info@satelitix.nl
 © 2025 Satelitix
 </footer>
 
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-const satellite = document.getElementById("satellite-wrapper");
-const path = document.getElementById("satellite-path");
+  const satellite = document.getElementById("satellite-wrapper");
+  const path = document.getElementById("satellite-path");
 
-if (!satellite || !path) return;
+  if (!satellite || !path) return;
 
-const pathLength = path.getTotalLength();
-const pathStart = path.getPointAtLength(0);
+  const pathLength = path.getTotalLength();
+  const pathStart = path.getPointAtLength(0);
 
-const scrollFactor = 0.8;
-function updateSatellite() {
-const scrollTop = window.scrollY;
-const docHeight =
-document.documentElement.scrollHeight - window.innerHeight;
+  function updateSatellite() {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-const progress = Math.min(scrollTop / (docHeight * scrollFactor), 1);   
-const point = path.getPointAtLength(progress * pathLength);
+    // 🔒 DESKTOP — untouched
+    const scrollFactor = isMobile ? 0.5 : 0.8;
+    const startScale   = isMobile ? 1.0 : 0.8;
+    const scaleGrowth  = isMobile ? 1.0 : 0.8;
 
-// ✅ RELATIVE movement (original SVG position preserved)
-const dx = point.x - pathStart.x;
-const dy = point.y - pathStart.y;
+    const scrollTop = window.scrollY;
+    const docHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
 
-const scale = 0.8 + progress * 0.8;
+    const progress = Math.min(
+      scrollTop / (docHeight * scrollFactor),
+      1
+    );
 
-satellite.style.transform = `
-     translate(${dx}px, ${dy}px)
-     scale(${scale})
-   `;
-}
+    const point = path.getPointAtLength(progress * pathLength);
 
-updateSatellite();
-window.addEventListener("scroll", updateSatellite, { passive: true });
+    // ✅ relative to original SVG position
+    const dx = point.x - pathStart.x;
+    const dy = point.y - pathStart.y;
+
+    const scale = startScale + progress * scaleGrowth;
+
+    satellite.style.transform = `
+      translate(${dx}px, ${dy}px)
+      scale(${scale})
+    `;
+  }
+
+  updateSatellite();
+  window.addEventListener("scroll", updateSatellite, { passive: true });
+  window.addEventListener("resize", updateSatellite);
 });
 </script>
+
 
 
 
