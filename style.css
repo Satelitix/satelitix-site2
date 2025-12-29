@@ -205,4 +205,8 @@ will-change: transform;
   pointer-events: none;
 }
 
+#satellite-wrapper {
+  transform-box: fill-box;
+  transform-origin: center;
+}
 
