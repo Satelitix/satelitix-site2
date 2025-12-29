@@ -870,9 +870,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const pathLength = path.getTotalLength();
   const pathStart = path.getPointAtLength(0);
   
-  const isMobile = window.matchMedia("(max-width: 800px)").matches;
-  const scrollFactor = isMobile ? 3.2 : 1.8;	
-  function updateSatellite() {
+  	const isMobile = window.matchMedia("(max-width: 800px)").matches;
+	const scrollFactor = isMobile ? 1.9 : 1.8;
+	function updateSatellite() {
     const scrollTop = window.scrollY;
     const docHeight =
       document.documentElement.scrollHeight - window.innerHeight;
