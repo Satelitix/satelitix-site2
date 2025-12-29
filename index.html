@@ -859,6 +859,7 @@ info@satelitix.nl
 © 2025 Satelitix
 </footer>
 
+	
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const satellite = document.getElementById("satellite-wrapper");
@@ -867,40 +868,33 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!satellite || !path) return;
 
   const pathLength = path.getTotalLength();
-
-  // 🔧 STARTPUNT: hoeveel van het pad we overslaan
-  // hiermee begint de satelliet netjes bij het logo
-  const startOffset = pathLength * 0.12; // ← pas aan indien nodig (0.08 – 0.2)
+  const pathStart = path.getPointAtLength(0);
 
   function updateSatellite() {
     const scrollTop = window.scrollY;
     const docHeight =
       document.documentElement.scrollHeight - window.innerHeight;
 
-    // veilige progress (0 → 1)
     const progress = Math.min(scrollTop / docHeight, 1);
 
-    // positie op het pad
-    const point = path.getPointAtLength(
-      startOffset + progress * (pathLength - startOffset)
-    );
+    const point = path.getPointAtLength(progress * pathLength);
 
-    // schaal groeit bij scroll
+    // ✅ RELATIVE movement (original SVG position preserved)
+    const dx = point.x - pathStart.x;
+    const dy = point.y - pathStart.y;
+
     const scale = 0.8 + progress * 0.6;
 
     satellite.style.transform = `
-      translate(${point.x}px, ${point.y}px)
+      translate(${dx}px, ${dy}px)
       scale(${scale})
     `;
   }
 
-  // init + scroll
   updateSatellite();
   window.addEventListener("scroll", updateSatellite, { passive: true });
 });
 </script>
-
-
 
 
 
